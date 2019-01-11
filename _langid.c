@@ -25,18 +25,28 @@ static PyMethodDef module_methods[] = {
     {NULL, NULL, 0, NULL}
 };
 
+
 /* Global LanguageIdentifier instance */
 LanguageIdentifier *identifier;
 
 /* Initialize the module */
-PyMODINIT_FUNC init_langid(void)
+static struct PyModuleDef Langid =
 {
-    PyObject *m = Py_InitModule3("_langid", module_methods, module_docstring);
+    PyModuleDef_HEAD_INIT,
+    "LangID",
+    module_docstring,
+    -1,
+    module_methods
+};
+
+PyMODINIT_FUNC PyInit__langid(void)
+{
+    PyObject *m =  PyModule_Create(&Langid);
     if (m == NULL)
         return;
-
     identifier = get_default_identifier();
-}
+    return m;
+};
 
 static PyObject *langid_identify(PyObject *self, PyObject *args)
 {
