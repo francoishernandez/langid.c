@@ -12,3 +12,10 @@ Finally we should be able to build:
 `make all`
 
 `sudo python3 setup.py install`
+
+
+Then, this can be used in python in the following way:
+```python
+from _langid import identify
+lang = identify("Toto va à la plage.")
+```
